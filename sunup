@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+# encoding=UTF-8
+
+# Copyright © 2018-2019 Jakub Wilk <jwilk@jwilk.net>
+# SPDX-License-Identifier: MIT
+
+import argparse
+import datetime
+import sys
+
+# fake the ‘requests’ module to speed up imports:
+sys.modules['requests'] = False
+
+import astral
+
+def parse_date(s):
+    return datetime.datetime.strptime(s, '%Y-%m-%d').date()
+
+def main():
+    ap = argparse.ArgumentParser()
+    today = datetime.date.today()
+    ap.add_argument('-L', '--location', metavar='LOCATION', required=True)
+    ap.add_argument('-d', '--date', type=parse_date, default=today)
+    options = ap.parse_args()
+    astro = astral.Astral()
+    loc = astro[options.location]
+    for i in [-1, 0, 1]:
+        date = options.date + i * datetime.timedelta(1)
+        def p(name, method):
+            ts = method(date)
+            if ts.date() == options.date:
+                print(name, ts, sep='\t')
+        p('midnight', loc.solar_midnight)
+        p('sunrise', loc.sunrise)
+        p('noon', loc.solar_noon)
+        p('sunset', loc.sunset)
+
+if __name__ == '__main__':
+    main()
+
+# vim:ts=4 sts=4 sw=4 et
