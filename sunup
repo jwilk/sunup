@@ -19,8 +19,8 @@ def parse_date(s):
 def main():
     ap = argparse.ArgumentParser()
     today = datetime.date.today()
-    ap.add_argument('-L', '--location', metavar='LOCATION', required=True)
-    ap.add_argument('-d', '--date', type=parse_date, default=today)
+    ap.add_argument('-L', dest='location', metavar='LOCATION', required=True)
+    ap.add_argument('-d', dest='date', type=parse_date, default=today)
     options = ap.parse_args()
     astro = astral.Astral()
     loc = astro[options.location]

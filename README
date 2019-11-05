@@ -16,8 +16,8 @@ Overview
 
    optional arguments:
      -h, --help            show this help message and exit
-     -L LOCATION, --location LOCATION
-     -d DATE, --date DATE
+     -L LOCATION
+     -d DATE
 
 Prerequisites
 =============
