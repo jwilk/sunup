@@ -1,6 +1,8 @@
 Overview
 ========
 
+**sunup** prints times of solar midnight, sunrise, solar noon and sunset:
+
 .. code:: console
 
    $ sunup -L Warsaw
@@ -8,6 +10,14 @@ Overview
    noon    2019-11-02 11:19:32+01:00
    sunset  2019-11-02 16:07:02+01:00
    midnight        2019-11-02 23:19:31+01:00
+
+   $ sunup --help
+   usage: sunup [-h] -L LOCATION [-d DATE]
+
+   optional arguments:
+     -h, --help            show this help message and exit
+     -L LOCATION, --location LOCATION
+     -d DATE, --date DATE
 
 Prerequisites
 =============
