@@ -24,7 +24,7 @@ Prerequisites
 
 * Python 3
 
-* astral_
+* astral_ ≥ 1.3
 
 .. _astral:
    https://pypi.org/project/astral/
