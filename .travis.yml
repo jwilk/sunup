@@ -20,7 +20,7 @@ install:
 - python3 -m pip install pydiatra $pyflakes
 - $if_pygments pip install restructuredtext-lint pygments
 script:
-- ./sunup -L Warsaw
+- prove -v
 - python3 -m pydiatra .
 - python3 -m pyflakes .
 - $if_pygments restructuredtext-lint --encoding=UTF-8 README
