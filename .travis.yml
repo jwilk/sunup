@@ -12,11 +12,13 @@ jobs:
   - python: "3.7"
   - python: "3.8-dev"
 before_install:
+- astral=astral
+- if [[ $TRAVIS_PYTHON_VERSION = 3.[2345] ]]; then astral+='<2'; fi
 - pyflakes=pyflakes
 - if [[ $TRAVIS_PYTHON_VERSION = 3.[23] ]]; then pyflakes='pyflakes<2'; fi
 - if [[ $TRAVIS_PYTHON_VERSION = 3.2 ]]; then if_pygments=:; fi
 install:
-- python3 -m pip install astral
+- python3 -m pip install $astral
 - python3 -m pip install pydiatra $pyflakes
 - $if_pygments pip install restructuredtext-lint pygments
 script:
