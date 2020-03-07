@@ -16,23 +16,45 @@ import astral
 def parse_date(s):
     return datetime.datetime.strptime(s, '%Y-%m-%d').date()
 
+try:
+    import astral.geocoder
+except ImportError:
+    astral.geocoder = None
+else:
+    import astral.location
+
+if astral.geocoder:
+    # astral >= 2.0
+    def get_location(name):
+        db = astral.geocoder.database()
+        locinfo = astral.geocoder.lookup(name, db)
+        return astral.location.Location(locinfo)
+else:
+    # astral < 2.0
+    def get_location(name):
+        astro = astral.Astral()
+        location = astro[name]
+        location.midnight = location.solar_midnight
+        location.noon = location.solar_noon
+        return location
+
 def main():
     ap = argparse.ArgumentParser()
     today = datetime.date.today()
     ap.add_argument('-L', dest='location', metavar='LOCATION', required=True)
     ap.add_argument('-d', dest='date', type=parse_date, default=today)
     options = ap.parse_args()
-    astro = astral.Astral()
-    loc = astro[options.location]
+    loc = get_location(options.location)
     for i in [-1, 0, 1]:
         date = options.date + i * datetime.timedelta(1)
         def p(name, method):
             ts = method(date)
+            ts = ts.replace(microsecond=0)
             if ts.date() == options.date:
                 print(name, ts, sep='\t')
-        p('midnight', loc.solar_midnight)
+        p('midnight', loc.midnight)
         p('sunrise', loc.sunrise)
-        p('noon', loc.solar_noon)
+        p('noon', loc.noon)
         p('sunset', loc.sunset)
 
 if __name__ == '__main__':
