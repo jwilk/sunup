@@ -12,6 +12,7 @@ jobs:
   - python: "3.7"
   - python: "3.8"
   - python: "3.9"
+  - python: "3.10-dev"
 before_install:
 - astral=astral
 - if [[ $TRAVIS_PYTHON_VERSION = 3.[2345] ]]; then astral+='<2'; fi
