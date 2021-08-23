@@ -40,6 +40,9 @@ else:
 
 def main():
     ap = argparse.ArgumentParser()
+    if sys.version_info < (3, 10):
+        # https://bugs.python.org/issue9694
+        ap._optionals.title = 'options'
     today = datetime.date.today()
     ap.add_argument('-L', dest='location', metavar='LOCATION', required=True)
     ap.add_argument('-d', dest='date', type=parse_date, default=today)
