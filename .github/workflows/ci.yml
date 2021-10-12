@@ -8,10 +8,13 @@ jobs:
     strategy:
       matrix:
         include:
-        # TODO: older versions
-        - python-version: '3.5'
+        - python-version: '3.3'
           os: ubuntu-18.04
           astral-version: '1.3'
+        - python-version: '3.4'
+          os: ubuntu-18.04
+        - python-version: '3.5'
+          os: ubuntu-18.04
         - python-version: '3.6'
           os: ubuntu-20.04
         - python-version: '3.7'
@@ -34,7 +37,9 @@ jobs:
         python3 -m pydiatra .
     - name: run pyflakes
       run: |
-        python3 -m pip install --user pyflakes
+        pyflakes=pyflakes
+        if [[ ${{matrix.python-version}} = 3.3 ]]; then pyflakes+='<2'; fi
+        python3 -m pip install $pyflakes
         python3 -m pyflakes .
     - name: check README syntax
       run: |
