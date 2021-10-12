@@ -8,16 +8,20 @@ jobs:
     strategy:
       matrix:
         include:
+        # TODO: older versions
         - python-version: '3.5'
           os: ubuntu-18.04
           astral-version: '1.3'
-        python-version:
-        - '3.6'
-        - '3.7'
-        - '3.8'
-        - '3.9'
-        - '3.10-dev'
-        os: [ubuntu-20.04]
+        - python-version: '3.6'
+          os: ubuntu-20.04
+        - python-version: '3.7'
+          os: ubuntu-20.04
+        - python-version: '3.8'
+          os: ubuntu-20.04
+        - python-version: '3.9'
+          os: ubuntu-20.04
+        - python-version: '3.10-dev'
+          os: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: set up Python ${{matrix.python-version}}
