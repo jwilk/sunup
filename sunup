@@ -13,6 +13,8 @@ sys.modules['requests'] = False
 
 import astral
 
+...  # Python 3 is required
+
 def parse_date(s):
     return datetime.datetime.strptime(s, '%Y-%m-%d').date()
 
