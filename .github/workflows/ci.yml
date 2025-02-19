@@ -8,15 +8,11 @@ jobs:
     strategy:
       matrix:
         include:
-        - python-version: '3.6'
-          os: ubuntu-20.04
-          astral-version: '1.3'
-        - python-version: '3.7'
-          os: ubuntu-20.04
         - python-version: '3.8'
-          os: ubuntu-20.04
+          os: ubuntu-22.04
+          astral-version: '1.3'
         - python-version: '3.9'
-          os: ubuntu-20.04
+          os: ubuntu-22.04
         - python-version: '3.10'
           os: ubuntu-22.04
         - python-version: '3.11'
